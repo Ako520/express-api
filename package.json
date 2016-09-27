@@ -1,0 +1,14 @@
+{
+  "name": "express-api",
+  "version": "1.0.0",
+  "description": "1. 上传项目 ：ssh/git/github   scp -r express-api haoqicat.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ako3C",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
