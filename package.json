@@ -1,4 +1,4 @@
-{
+ {
   "name": "express-api",
   "version": "1.0.0",
   "description": "1. 上传项目 ：ssh/git/github   scp -r express-api haoqicat.com",
