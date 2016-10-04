@@ -1,9 +1,21 @@
 var express = require('express')
 var app = express()
-var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
+var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json());
+app.use(bodyParser.json());//用于使用body中间件截取数据
+
+mongoose.Promise = global.Promise;// 用来在命令行只显示自己需要的信息,不需要的乱七八糟的不要显示
+mongoose.connect('mongodb://localhost:27017/express-api') //上面两行连接数据库
+
+var Post = require('./models/post.js') //连上集合
+
+var db = mongoose.connection;
+db.on('error', console.log);
+db.once('open', function() {
+  console.log('success!')
+});
 
 
 app.get('/',function (req,res) {
@@ -24,6 +36,15 @@ app.put('/posts/:id',function (req,res) {
   res.send('更新了')
 })
 app.post('/posts/',function (req,res) {
+  var post = new Post({title:req.body.title})
+  post.save(function(err){
+    if (err) {
+      console.log(err);
+    }
+    else{
+      console.log('saved');
+    }
+  })
   console.log('post'+req.body.title)
   res.send(req.body.title)
 })
