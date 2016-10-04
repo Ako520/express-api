@@ -21,15 +21,11 @@ db.once('open', function() {
 app.get('/',function (req,res) {
   res.send('咯咯')
 })
-app.get('/write',function (req,res) {
-  res.send('<form method="post" action="/posts" >'+
-  '<input type="text" name="title"/>'+
-  '<input type="text" name="content"/>'+
-  '<button type="submit">提交</button>'+
-'</form>')
-})
+
 app.get('/posts',function (req,res) {
-  res.send('GET /posts')
+    Post.find().exec(function(err, posts) {
+      res.json({ post: posts})
+    });
 })
 app.put('/posts/:id',function (req,res) {
   console.log('更新')
